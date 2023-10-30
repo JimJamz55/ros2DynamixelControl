@@ -1,0 +1,9 @@
+. install/local_setup.bash must be run on each terminal for this dynamixel projects workspace. Its almost like sourcing gazebo and ros every time. Since its project specific, I think I might leave it out of the ~/.bashrc file.
+
+Following this guide:
+https://www.youtube.com/watch?v=E8XPqDjof4U
+
+Uninstall packages
+Uninstall is as simple as deleting the package directory in src/ and then also deleting the top level build/ install/ and log/ directories. Then run colcon build to regenerate these files during a build. Process was found here...
+https://answers.ros.org/question/364116/ros2-how-to-uninstallremove-a-package/
+I had issue with this since it then attempted to build my new package and couldn't because it had not yet built the dymaixel sdk library. However, it would then abort before building the library. I think this was an issue with order/dependencies but I don't really know how ament/CMake set that. I just deleted the new package and then dynamixel would build again. For that reason, try not to have to delete packages.
