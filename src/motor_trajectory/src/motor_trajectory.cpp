@@ -32,15 +32,15 @@ private:
   void publishPos()
   {
     time += 0.01;
-    auto pos1 = dynamixel_sdk_custom_interfaces::msg::SetPosition();
-    pos1.id = 3;
-    pos1.position = int((sin(time)/2+0.5)*250+590);//650-840;
-    publisher_->publish(pos1);
+    auto pos = dynamixel_sdk_custom_interfaces::msg::SetPosition();
+    pos.id = 3;
+    pos.position = int((sin(time)/2+0.5)*250+590);//650-840;
+    publisher_->publish(pos);
 
-    auto pos2 = dynamixel_sdk_custom_interfaces::msg::SetPosition();
+    /*auto pos2 = dynamixel_sdk_custom_interfaces::msg::SetPosition();
     pos2.id = 4;
-    pos2.position = int((sin(time)/2+0.5)*250+590);//650-840;                                                         
-    publisher_->publish(pos2);
+    pos2.position = int((sin(time)/2+0.5)*250+590);
+    publisher_->publish(pos2);*/
 
   }
 
