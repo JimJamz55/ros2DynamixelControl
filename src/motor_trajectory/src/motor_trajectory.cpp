@@ -23,18 +23,27 @@ public:
     //publisher_ = this->create_publisher<dynamixel_sdk_custom_interfaces::msg::SetPosition>("set_position", 10);
     //create_publisher<dynamixel_sdk_custom_interfaces::msg::SetPosition>("set_position", 10) publisher_;
     timer_ = this->create_wall_timer(std::chrono::milliseconds(10), std::bind(&TrajectoryGen::publishPos, this));
-    //auto timer_ = this->create_wall_timer(std::chrono::milliseconds(10), std::bind(&TrajectoryGen::publishPos2, this));
+    //auto timer_ = this->create_wall_timer(std::chrono::milliseconds(10), std::bind(&TrajectoryGen::publishPos, this));
     //rclcpp::Time now = this->get_clock()->now();
-    
+    /*rclcpp::Clock simTime;
+      this->NodeClock();*/
     RCLCPP_INFO(this->get_logger(), "trajectory generator has started");
   }
 private:
   void publishPos()
   {
+    //RCLCPP_INFO(this->get_logger(), std::string(now()));
+    //std::cout << now().seconds() << std::endl;
+    //std::cout << this->Time::seconds();
+    //printf("%d\n", get_clock()->now().seconds());
+    //std::cout << "Is clock active?: " << get_clock()->ros_time_is_active() << std::endl;
+    //std::cout << "Node clock interface: " << get_node_clock_interface() << std::endl;
     time += 0.01;
     auto pos = dynamixel_sdk_custom_interfaces::msg::SetPosition();
     pos.id = 3;
-    pos.position = int((sin(time)/2+0.5)*250+590);//650-840;
+    uint16_t min = 620;
+    uint16_t range = 250;
+    pos.position = int((sin(time)/2+0.5)*range+min);//650-840;
     publisher_->publish(pos);
 
     /*auto pos2 = dynamixel_sdk_custom_interfaces::msg::SetPosition();
